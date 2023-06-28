@@ -21,9 +21,5 @@ class SportsTogetherBackendApplicationTests {
         com.example.sportstogetherbackend.entity.User user = userMapper.findUserByUsernameOrEmail("user1");
         System.out.println(user);
     }
-    @Test
-    void test() {
-        Role user = userMapper.findRoleByUsernameOrEmail("user1");
-        System.out.println(user);
-    }
+
 }

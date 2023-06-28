@@ -1,6 +1,7 @@
 package com.example.sportstogetherbackend.service.impl;
 
 import com.example.sportstogetherbackend.entity.Role;
+import com.example.sportstogetherbackend.mapper.RoleMapper;
 import com.example.sportstogetherbackend.mapper.UserMapper;
 import com.example.sportstogetherbackend.service.AuthorizeService;
 import jakarta.annotation.Resource;
@@ -24,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class AuthorizeServiceImpl implements AuthorizeService {
     @Resource
     UserMapper userMapper;
+    @Resource
+    RoleMapper roleMapper;
     @Value("${spring.mail.username}")
     String from;
     @Resource
@@ -40,7 +43,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         if (user == null) {
             throw new UsernameNotFoundException("用户名或密码错误");
         }
-        Role userRole = userMapper.findRoleByUsernameOrEmail(user.getUsername());
+        Role userRole = roleMapper.findRoleByUsernameOrEmail(user.getUsername());
         return User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
@@ -91,7 +94,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                 password = encoder.encode(password);
                 if (userMapper.insertUser(username, password, email) > 0) {
                     com.example.sportstogetherbackend.entity.User u = userMapper.findUserByUsernameOrEmail(username);
-                    if (userMapper.addRoleByUserIDAndRoleID(u.getId(),1) > 0) {
+                    if (roleMapper.addRoleByUserIDAndRoleID(u.getId(),1) > 0) {
                         return null;
                     }
                 }
@@ -125,4 +128,5 @@ public class AuthorizeServiceImpl implements AuthorizeService {
         password = encoder.encode(password);
         return userMapper.resetPasswordByEmail(password, email) > 0;
     }
+
 }

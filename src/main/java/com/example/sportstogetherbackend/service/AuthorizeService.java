@@ -1,5 +1,6 @@
 package com.example.sportstogetherbackend.service;
 
+import com.example.sportstogetherbackend.entity.Role;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AuthorizeService extends UserDetailsService {

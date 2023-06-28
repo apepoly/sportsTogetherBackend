@@ -15,14 +15,14 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class AuthorizeInterceptor implements HandlerInterceptor {
     @Resource
     UserMapper mapper;
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication authentication = context.getAuthentication();
-        User user = (User) authentication.getPrincipal();
-        String username = user.getUsername();
-        com.example.sportstogetherbackend.entity.User u = mapper.findUserByUsernameOrEmail(username);
-        request.getSession().setAttribute("user", u);
-        return true;
-    }
+//    @Override
+//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+////        SecurityContext context = SecurityContextHolder.getContext();
+////        Authentication authentication = context.getAuthentication();
+////        User user = (User) authentication.getPrincipal();
+////        String username = user.getUsername();
+////        com.example.sportstogetherbackend.entity.User u = mapper.findUserByUsernameOrEmail(username);
+////        request.getSession().setAttribute("user", u);
+////        return true;
+//    }
 }

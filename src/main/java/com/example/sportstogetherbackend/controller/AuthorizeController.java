@@ -76,6 +76,5 @@ public class AuthorizeController {
         } else {
             return RestBean.failure(500, "内部错误，请联系管理员");
         }
-
     }
 }
