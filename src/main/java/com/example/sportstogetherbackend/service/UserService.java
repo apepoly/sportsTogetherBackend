@@ -1,8 +1,5 @@
 package com.example.sportstogetherbackend.service;
 
-import com.example.sportstogetherbackend.entity.PageParam;
-import com.example.sportstogetherbackend.entity.RestBean;
-import com.example.sportstogetherbackend.entity.Role;
 import com.example.sportstogetherbackend.entity.User;
 
 import java.util.List;
@@ -13,4 +10,6 @@ public interface UserService {
     int getUserCount();
     String updateUser(Integer id, String username, String email);
     String deleteUser(Integer id);
+    String insertUser(String username, String password, String email, Integer roleID);
+    String setGym(Integer userID, Integer gymID);
 }

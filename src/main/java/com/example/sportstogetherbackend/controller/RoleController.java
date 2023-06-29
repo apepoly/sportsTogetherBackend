@@ -24,10 +24,16 @@ public class RoleController {
         return RestBean.success(roleService.getRoles());
     }
     @PostMapping("/updateRole")
-    public RestBean<String> updateRole(@RequestParam("id") Integer id, @RequestParam("name") String name) {
-        String s = roleService.updateRoleByID(id, name);
+    public RestBean<String> updateRole(@RequestParam("role") String role, @RequestParam("username") String username) {
+        int roleID = switch (role) {
+            case "超级管理员" -> 3;
+            case "管理员" -> 2;
+            case "用户" -> 1;
+            default -> -1;
+        };
+        String s = roleService.updateRoleByID(roleID, username);
         if (s ==null)
-          return RestBean.success();
+          return RestBean.success("修改成功");
         return RestBean.failure(400, s);
     }
 }

@@ -3,7 +3,8 @@ package com.example.sportstogetherbackend.entity;
 import lombok.Data;
 
 @Data
-public class Permission {
+public class CourtImage {
     private Integer id;
-    private String name;
+    private Integer courtID;
+    private String url;
 }

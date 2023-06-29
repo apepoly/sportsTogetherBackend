@@ -92,11 +92,8 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                     return "此用户名已被注册，请更换用户名";
                 template.delete(key);
                 password = encoder.encode(password);
-                if (userMapper.insertUser(username, password, email) > 0) {
-                    com.example.sportstogetherbackend.entity.User u = userMapper.findUserByUsernameOrEmail(username);
-                    if (roleMapper.addRoleByUserIDAndRoleID(u.getId(),1) > 0) {
-                        return null;
-                    }
+                if (userMapper.insertUser(username, password, email , 1) > 0) {
+                   return null;
                 }
                 return "内部错误，请联系管理员";
             } else {

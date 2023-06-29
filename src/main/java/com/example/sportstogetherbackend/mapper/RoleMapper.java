@@ -10,16 +10,10 @@ import java.util.List;
 
 @Mapper
 public interface RoleMapper {
-    @Select("select * " +
-            "from user u " +
-            "right join user_role ur on u.id = ur.user_id " +
-            "left join role on ur.role_id = role.id " +
-            "where username = #{text} or email = #{text}")
+    @Select("select * from user right join role on user.role_id = role.id where user.username = #{text} or email = #{text}")
     Role findRoleByUsernameOrEmail(String text);
-    @Insert("insert into user_role(user_id, role_id) values(#{userID}, #{roleID})")
-    int addRoleByUserIDAndRoleID(Integer userID, Integer roleID);
     @Select("select * from role")
     List<Role> getRoles();
-    @Update("update role set name = #{name} where id={id}")
-    int updateRoleByID(Integer id,String name);
+    @Update("update user set role_id = #{roleID} where username=#{username}")
+    int updateRoleByID(Integer roleID, String username);
 }
